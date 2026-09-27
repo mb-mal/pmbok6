@@ -1,0 +1,12 @@
+{
+  "name": "pmbok6-skill",
+  "version": "2.0.0",
+  "private": true,
+  "description": "PMBOK 6 project management skill for AI agents",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test tests/pmcalc.test.js && node scripts/validate.js",
+    "validate": "node scripts/validate.js"
+  }
+}

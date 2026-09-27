@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm test
+      - name: Installer smoke test
+        run: |
+          bash install.sh --source . --target "$RUNNER_TEMP/skills"
+          test -f "$RUNNER_TEMP/skills/pmbok6/SKILL.md"
+          node "$RUNNER_TEMP/skills/pmbok6/scripts/pmcalc.js" channels --n 5
+      - name: Shellcheck
+        run: shellcheck install.sh
